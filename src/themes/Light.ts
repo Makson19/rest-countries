@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material'
 
 export const LightTheme = createTheme({
   typography: {
-    fontFamily: 'Nunito Sans, sans-serif'
+    fontFamily: 'Nunito Sans, sans-serif',
   },
   palette: {
     primary: {
@@ -10,6 +10,9 @@ export const LightTheme = createTheme({
       dark: 'hsl(0, 0%, 50%)',
       light: 'hsl(200, 15%, 8%)',
       contrastText: 'hsl(200, 15%, 8%)'
+    },
+    text: {
+      primary: 'hsl(200, 15%, 8%)'
     },
     background: {
       default: 'hsl(0, 0%, 99%)',

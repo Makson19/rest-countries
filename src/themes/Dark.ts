@@ -9,6 +9,9 @@ export const DarkTheme = createTheme({
       main: 'hsl(209, 23%, 22%)',
       contrastText: 'hsl(0, 100%, 100%)'
     },
+    text: {
+      primary: 'hsl(0, 100%, 100%)'
+    },
     background: {
       default: 'hsl(207, 26%, 17%)',
       paper: 'hsl(209, 23%, 22%)'
