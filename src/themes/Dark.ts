@@ -1,0 +1,17 @@
+import { createTheme } from '@mui/material'
+
+export const DarkTheme = createTheme({
+  typography: {
+    fontFamily: 'Nunito Sans, sans-serif'
+  },
+  palette: {
+    primary: {
+      main: 'hsl(209, 23%, 22%)',
+      contrastText: 'hsl(0, 100%, 100%)'
+    },
+    background: {
+      default: 'hsl(207, 26%, 17%)',
+      paper: 'hsl(209, 23%, 22%)'
+    }
+  }
+})
