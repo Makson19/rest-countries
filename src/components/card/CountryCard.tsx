@@ -17,7 +17,11 @@ const CardContainer = styled(Card)(() => ({
     '& .country_name': {
       fontSize: '16px',
       fontWeight: 800,
-      marginBottom: '12px'
+      marginBottom: '12px',
+      maxWidth: '100%',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
     },
 
     '& .country_info': {
@@ -60,6 +64,7 @@ const CountryCard: React.FC<ICountryCardProps> = ({ data }) => {
         <Typography
           component='h4'
           className='country_name'
+          title={data.name.common}
         >
           {data.name.common}
         </Typography>

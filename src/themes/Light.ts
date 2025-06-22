@@ -11,6 +11,9 @@ export const LightTheme = createTheme({
       light: 'hsl(200, 15%, 8%)',
       contrastText: 'hsl(200, 15%, 8%)'
     },
+    secondary: {
+      main: 'hsl(200, 15%, 8%)'
+    },
     text: {
       primary: 'hsl(200, 15%, 8%)'
     },
