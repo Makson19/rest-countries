@@ -12,7 +12,7 @@ const CardContainer = styled(Card)(() => ({
   },
 
   '& > .country': {
-    padding: '24px 16px 40px',
+    padding: '24px 16px 40px !important',
 
     '& .country_name': {
       fontSize: '16px',

@@ -40,7 +40,6 @@ const AppThemeProvider: React.FC<IAppThemeProviderProps> = ({ children }) => {
           sx={{
             background: theme.palette.background.default,
             minHeight: '100vh',
-            width: '100vw',
           }}
         >
           {children}

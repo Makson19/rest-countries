@@ -11,7 +11,7 @@ const Template = () => {
   return (
     <LayoutContainer>
       <Header />
-      <Box>
+      <Box sx={{ minHeight: 'calc(100vh - 84.5px)' }}>
         <Outlet />
       </Box>
     </LayoutContainer>
