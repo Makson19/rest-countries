@@ -16,6 +16,10 @@ const TextFieldComponent = styled(TextField)(({ theme }) => ({
 
     '& > fieldset': {
       border: 'none'
+    },
+
+    '& > .MuiInputBase-input:focus ~ fieldset': {
+      border: `1px solid ${theme.palette.primary.contrastText}`
     }
   }
 }))

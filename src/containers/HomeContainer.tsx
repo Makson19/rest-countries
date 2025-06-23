@@ -2,15 +2,14 @@
 import { useCallback, useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import { debounce } from 'lodash'
-import { Box, Grid, Pagination } from '@mui/material'
+import { Box, CircularProgress, Grid, Pagination } from '@mui/material'
 import CountryCard from '../components/card/CountryCard'
 import Input from '../components/input/Input'
-import Loading from '../components/loading/Loading'
 import SearchIcon from '@mui/icons-material/Search'
+import Select from '../components/select/Select'
 import http from '../services/https'
 import { slicer } from '../utils/functions'
 import type { ICountry } from '../models/ICountry'
-import Select from '../components/select/Select'
 
 const Container = styled(Box)(() => ({
   '& > .filters': {
@@ -18,6 +17,12 @@ const Container = styled(Box)(() => ({
     display: 'flex',
     justifyContent: 'space-between',
     marginBlock: '40px'
+  },
+
+  '& > .loading_container': {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingBlock: '24px'
   },
 
   '& > .pagination': {
@@ -51,6 +56,7 @@ const HomeContainer = () => {
   }, [])
 
   const getCountryByName = useCallback(debounce(async (name: string) => {
+    setIsLoading(true)
     try {
       const response = await http.get(`/name/${name}`)
       const normalizeData: ICountry[] = response.data?.map((country: ICountry) => ({
@@ -66,9 +72,11 @@ const HomeContainer = () => {
     } catch (error) {
       console.error(error)
     }
+    setIsLoading(false)
   }, 500), [])
 
   const getCountriesByRegion = useCallback(async (region: string) => {
+    setIsLoading(true)
     try {
       const response = await http.get(`/region/${region}`)
       const normalizeData: ICountry[] = response.data?.map((country: ICountry) => ({
@@ -84,6 +92,7 @@ const HomeContainer = () => {
     } catch (error) {
       console.error(error)
     }
+    setIsLoading(false)
   }, [])
 
   const handleSearchCountryByName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,12 +128,6 @@ const HomeContainer = () => {
     fetchCountries()
   }, [])
 
-  if (isLoading) {
-    return (
-      <Loading />
-    )
-  }
-
   return (
     <Box className='container'>
       <Container>
@@ -154,20 +157,28 @@ const HomeContainer = () => {
           />
         </Box>
 
-        <Grid
-          container
-          rowSpacing={8}
-          columnSpacing={8}
-        >
-          {countries?.[page - 1]?.map((item, index) => (
-            <Grid
-              key={index}
-              size={{ xs: 3 }}
-            >
-              <CountryCard data={item} />
-            </Grid>
-          ))}
-        </Grid>
+        {isLoading && (
+          <Box className='loading_container'>
+            <CircularProgress color='secondary' size={45} />
+          </Box>
+        )}
+
+        {!isLoading && (
+          <Grid
+            container
+            rowSpacing={8}
+            columnSpacing={8}
+          >
+            {countries?.[page - 1]?.map((item, index) => (
+              <Grid
+                key={index}
+                size={{ xs: 3 }}
+              >
+                <CountryCard data={item} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
 
         {countries?.length > 1 && (
           <Box className='pagination'>

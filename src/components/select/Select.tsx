@@ -21,7 +21,12 @@ const SelectComponent = styled(TextField)(({ theme }) => ({
     },
 
     '& > fieldset': {
-      border: 'none'
+      border: 'none',
+      transition: 'border 0.3s ease-in-out'
+    },
+
+    '& > .MuiSelect-select:hover ~ fieldset': {
+      border: `1px solid ${theme.palette.primary.contrastText}`
     }
   }
 }))
