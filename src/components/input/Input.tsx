@@ -44,6 +44,7 @@ const Input: React.FC<InputProps> = React.memo(({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      autoComplete='off'
       slotProps={{
         input: {
           startAdornment: (
