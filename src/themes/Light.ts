@@ -5,6 +5,7 @@ export const LightTheme = createTheme({
     fontFamily: 'Nunito Sans, sans-serif',
   },
   palette: {
+    mode: 'light',
     primary: {
       main: 'hsl(0, 100%, 100%)',
       dark: 'hsl(0, 0%, 50%)',

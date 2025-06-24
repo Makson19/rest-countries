@@ -8,7 +8,9 @@ const HeaderContainer = styled('header')(({ theme }) => ({
 
   '& > .navbar': {
     alignItems: 'center',
-    boxShadow: 'rgba(0, 0, 0, 0.031) 0px 0px 3px 3px',
+    boxShadow: theme.palette.mode === 'light'
+      ? '0px 0px 3px 3px rgba(0, 0, 0, 0.03)'
+      : '0px 7px 6px -4px rgba(9, 9, 9, 0.27)',
     display: 'flex',
     justifyContent: 'space-between',
     padding: '24px 48px',

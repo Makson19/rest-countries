@@ -3,9 +3,12 @@ import { styled } from '@mui/material/styles'
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import type { ICountry } from '../../models/ICountry'
 
-const CardContainer = styled(Card)(() => ({
+const CardContainer = styled(Card)(({ theme }) => ({
   borderRadius: '8px',
-  boxShadow: 'rgba(0, 0, 0, 0.031) 0px 0px 3px 3px',
+  boxShadow: theme.palette.mode === 'light'
+    ? '0px 0px 3px 3px rgba(0, 0, 0, 0.03)'
+    : '0px 7px 6px -4px rgba(9, 9, 9, 0.27)',
+  transition: 'transform 0.3s ease-in-out',
 
   '& > .country_image': {
     height: '150px'
@@ -45,6 +48,10 @@ const CardContainer = styled(Card)(() => ({
         }
       }
     }
+  },
+
+  '&:hover': {
+    transform: 'scale(1.05)',
   }
 }))
 

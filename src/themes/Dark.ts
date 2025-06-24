@@ -5,9 +5,10 @@ export const DarkTheme = createTheme({
     fontFamily: 'Nunito Sans, sans-serif'
   },
   palette: {
+    mode: 'dark',
     primary: {
       main: 'hsl(209, 23%, 22%)',
-      contrastText: 'hsl(0, 100%, 100%)'
+      contrastText: 'hsl(0, 100%, 100%)',
     },
     secondary: {
       main: 'hsl(0, 100%, 100%)'
@@ -18,6 +19,6 @@ export const DarkTheme = createTheme({
     background: {
       default: 'hsl(207, 26%, 17%)',
       paper: 'hsl(209, 23%, 22%)'
-    }
-  }
+    },
+  },
 })

@@ -1,4 +1,5 @@
 import Template from '../components/template/Template'
+import CountryInfoPage from '../pages/CountryInfoPage'
 import HomePage from '../pages/HomePage'
 
 export const routes = [
@@ -10,6 +11,10 @@ export const routes = [
         path: '/',
         index: true,
         element: <HomePage />
+      },
+      {
+        path: '/:country',
+        element: <CountryInfoPage />
       }
     ]
   }

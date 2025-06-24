@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from 'react'
-import { styled } from '@mui/material/styles'
+import { Link } from 'react-router-dom'
 import { debounce } from 'lodash'
+import { styled } from '@mui/material/styles'
 import { Box, CircularProgress, Grid, Pagination } from '@mui/material'
 import CountryCard from '../components/card/CountryCard'
 import Input from '../components/input/Input'
@@ -30,6 +31,10 @@ const Container = styled(Box)(() => ({
     justifyContent: 'flex-end',
     marginTop: '24px'
   }
+}))
+
+const LinkComponent = styled(Link)(() => ({
+  textDecoration: 'none',
 }))
 
 const perPage = 8
@@ -174,7 +179,9 @@ const HomeContainer = () => {
                 key={index}
                 size={{ xs: 3 }}
               >
-                <CountryCard data={item} />
+                <LinkComponent to={`/${item.name.common.toLowerCase()}`}>
+                  <CountryCard data={item} />
+                </LinkComponent>
               </Grid>
             ))}
           </Grid>
