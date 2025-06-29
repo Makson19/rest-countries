@@ -1,35 +1,7 @@
 import React from 'react'
-import { IconButton, InputAdornment, MenuItem, TextField } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { IconButton, InputAdornment, MenuItem } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-
-const SelectComponent = styled(TextField)(({ theme }) => ({
-  background: theme.palette.background.paper,
-  borderRadius: '6px',
-  boxShadow: 'rgba(0, 0, 0, 0.031) 0px 0px 3px 3px',
-  maxWidth: '260px',
-  width: '100%',
-
-  '& .MuiInputBase-root': {
-    '& > .MuiInputAdornment-root': {
-      color: theme.palette.primary.contrastText,
-      marginRight: '25px'
-    },
-
-    '& .MuiSvgIcon-root': {
-      color: theme.palette.primary.contrastText
-    },
-
-    '& > fieldset': {
-      border: 'none',
-      transition: 'border 0.3s ease-in-out'
-    },
-
-    '& > .MuiSelect-select:hover ~ fieldset': {
-      border: `1px solid ${theme.palette.primary.contrastText}`
-    }
-  }
-}))
+import { SelectComponent } from './styles/Select.styles'
 
 interface ISelectProps {
   clearField?: () => void;
@@ -38,6 +10,7 @@ interface ISelectProps {
   options: { value: string, label: string }[];
   placeholder?: string;
   value: string;
+  sx?: React.CSSProperties;
 }
 
 const Select: React.FC<ISelectProps> = React.memo(({
@@ -46,7 +19,8 @@ const Select: React.FC<ISelectProps> = React.memo(({
   onChange,
   options,
   placeholder,
-  value
+  value,
+  sx
 }) => {
   return (
     <SelectComponent
@@ -56,6 +30,7 @@ const Select: React.FC<ISelectProps> = React.memo(({
       value={value}
       onChange={onChange}
       defaultValue='all'
+      sx={sx}
       slotProps={{
         input: {
           endAdornment: (

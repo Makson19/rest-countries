@@ -1,41 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { debounce } from 'lodash'
-import { styled } from '@mui/material/styles'
 import { Box, CircularProgress, Grid, Pagination } from '@mui/material'
 import CountryCard from '../components/card/CountryCard'
 import Input from '../components/input/Input'
-import SearchIcon from '@mui/icons-material/Search'
 import Select from '../components/select/Select'
 import http from '../services/https'
 import { slicer } from '../utils/functions'
 import type { ICountry } from '../models/ICountry'
-
-const Container = styled(Box)(() => ({
-  '& > .filters': {
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBlock: '40px'
-  },
-
-  '& > .loading_container': {
-    display: 'flex',
-    justifyContent: 'center',
-    paddingBlock: '24px'
-  },
-
-  '& > .pagination': {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginTop: '24px'
-  }
-}))
-
-const LinkComponent = styled(Link)(() => ({
-  textDecoration: 'none',
-}))
+import SearchIcon from '@mui/icons-material/Search'
+import { Container, LinkComponent } from './styles/HomeContainer.styles'
 
 const perPage = 8
 
@@ -45,8 +19,6 @@ const HomeContainer = () => {
   const [countries, setCountries] = useState<Array<ICountry[]>>([])
   const [page, setPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
-  // console.log('countryName', countryName)
-  // console.log('region', region)
 
   const fetchCountries = useCallback(async () => {
     setIsLoading(true)
@@ -137,29 +109,33 @@ const HomeContainer = () => {
     <Box className='container'>
       <Container>
         <Box className='filters'>
-          <Input
-            name='search_country_by_name'
-            placeholder='Search for a country'
-            value={countryName}
-            onChange={handleSearchCountryByName}
-            startIcon={<SearchIcon />}
-          />
+          <Box className='filter_by_name'>
+            <Input
+              name='search_country_by_name'
+              placeholder='Search for a country'
+              value={countryName}
+              onChange={handleSearchCountryByName}
+              startIcon={<SearchIcon />}
+            />
+          </Box>
 
-          <Select
-            name='search_country_by_region'
-            placeholder='Filter by Region'
-            value={region}
-            onChange={handleSearchCountriesByRegion}
-            clearField={clearSearchCountryByRegion}
-            options={[
-              { value: 'all', label: 'Filter by Region' },
-              { value: 'africa', label: 'Africa' },
-              { value: 'america', label: 'America' },
-              { value: 'asia', label: 'Asia' },
-              { value: 'europe', label: 'Europa' },
-              { value: 'oceania', label: 'Oceania' }
-            ]}
-          />
+          <Box className='filter_by_region'>
+            <Select
+              name='search_country_by_region'
+              placeholder='Filter by Region'
+              value={region}
+              onChange={handleSearchCountriesByRegion}
+              clearField={clearSearchCountryByRegion}
+              options={[
+                { value: 'all', label: 'Filter by Region' },
+                { value: 'africa', label: 'Africa' },
+                { value: 'america', label: 'America' },
+                { value: 'asia', label: 'Asia' },
+                { value: 'europe', label: 'Europa' },
+                { value: 'oceania', label: 'Oceania' }
+              ]}
+            />
+          </Box>
         </Box>
 
         {isLoading && (
@@ -171,13 +147,13 @@ const HomeContainer = () => {
         {!isLoading && (
           <Grid
             container
-            rowSpacing={8}
-            columnSpacing={8}
+            rowSpacing={{ xs: 4, xl: 8 }}
+            columnSpacing={{ xs: 4, xl: 8 }}
           >
             {countries?.[page - 1]?.map((item, index) => (
               <Grid
                 key={index}
-                size={{ xs: 3 }}
+                size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
               >
                 <LinkComponent to={`/${item.name.common.toLowerCase()}`}>
                   <CountryCard data={item} />

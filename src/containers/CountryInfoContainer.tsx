@@ -1,96 +1,18 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Grid, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles'
 import http from '../services/https'
 import type { ICountryInfo } from '../models/ICountry'
 import LinkButton from '../components/button/LinkButton'
 import Loading from '../components/loading/Loading'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
-
-const CountryContainer = styled(Box)(() => ({
-  '& > .btn_container': {
-    marginBlock: '64px'
-  },
-
-  '& > .country': {
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: 'space-between',
-
-    '& .country_flag': {
-      flex: 1,
-
-      '& .flag': {
-        maxWidth: '600px',
-        height: '400px',
-
-        '& > img': {
-          height: '100%',
-          width: '100%'
-        }
-      }
-    },
-
-    '& .country_info': {
-      flex: 1,
-
-      '& .country_name': {
-        fontSize: '32px',
-        fontWeight: 800,
-        marginBottom: '24px'
-      },
-
-      '& .grid': {
-        '& .column': {
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '8px'
-        }
-      },
-
-      '& .info': {
-        display: 'flex',
-        gap: '4px',
-        fontSize: '16px',
-
-        '& > .label': {
-          fontWeight: 600,
-          whiteSpace: 'nowrap'
-        },
-
-        '& > .value': {
-          fontWeight: 300,
-        }
-      }
-    },
-
-    '& .country_borders': {
-      marginTop: '52px',
-
-      '& > .info': {
-        gap: '8px',
-        '& > .label': {
-          marginTop: '6px'
-        }
-      },
-
-      '& .borders': {
-        alignItems: 'center',
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '8px'
-      }
-    }
-  }
-}))
+import { CountryContainer } from './styles/CountryInfoContainer.styles'
 
 const CountryInfoContainer = () => {
   const { country } = useParams()
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<ICountryInfo>({} as ICountryInfo)
   const [borders, setBorders] = useState<(string | undefined)[]>([])
-  console.log('data', data)
 
   const findBorders = useCallback(async (border: string) => {
     try {
@@ -161,8 +83,15 @@ const CountryInfoContainer = () => {
               {data?.name?.common}
             </Typography>
 
-            <Grid container className='grid'>
-              <Grid size={{ xs: 6 }} className='column'>
+            <Grid
+              container
+              className='grid'
+              rowGap={{ xs: 4, lg: 0 }}
+            >
+              <Grid
+                size={{ xs: 12, sm: 6, md: 12, lg: 6 }}
+                className='column'
+              >
                 <Box className='info'>
                   <Box
                     className='label'
@@ -244,7 +173,10 @@ const CountryInfoContainer = () => {
                 </Box>
               </Grid>
 
-              <Grid size={{ xs: 6 }} className='column'>
+              <Grid
+                size={{ xs: 12, sm: 6, md: 12, lg: 6 }}
+                className='column'
+              >
                 <Box className='info'>
                   <Box
                     className='label'
@@ -294,27 +226,25 @@ const CountryInfoContainer = () => {
                 </Box>
               </Grid>
             </Grid>
+          </Box>
 
-            <Box className='country_borders'>
-              <Box className='info'>
-                <Box className='label'>
-                  Border Countries:
-                </Box>
+          <Box className='country_borders'>
+            <Box className='info'>
+              <Box className='label'>
+                Border Countries:
+              </Box>
 
-                <Box className='borders'>
-                  {borders?.map(item => (
-                    <LinkButton
-                      key={item}
-                      to={`/${String(item?.toLowerCase())}`}
-                      text={String(item)}
-                    />
-                  ))}
-                </Box>
+              <Box className='borders'>
+                {borders?.map(item => (
+                  <LinkButton
+                    key={item}
+                    to={`/${String(item?.toLowerCase())}`}
+                    text={String(item)}
+                  />
+                ))}
               </Box>
             </Box>
           </Box>
-
-
         </Box>
       </CountryContainer>
     </Box>

@@ -1,28 +1,6 @@
 import React from 'react'
-import { InputAdornment, TextField } from '@mui/material'
-import { styled } from '@mui/material/styles'
-
-const TextFieldComponent = styled(TextField)(({ theme }) => ({
-  background: theme.palette.background.paper,
-  borderRadius: '6px',
-  boxShadow: 'rgba(0, 0, 0, 0.031) 0px 0px 3px 3px',
-  maxWidth: '450px',
-  width: '100%',
-
-  '& .MuiInputBase-root': {
-    '& > .MuiInputAdornment-root': {
-      color: theme.palette.primary.contrastText,
-    },
-
-    '& > fieldset': {
-      border: 'none'
-    },
-
-    '& > .MuiInputBase-input:focus ~ fieldset': {
-      border: `1px solid ${theme.palette.primary.contrastText}`
-    }
-  }
-}))
+import { InputAdornment } from '@mui/material'
+import { TextFieldComponent } from './styles/Input.styles'
 
 interface InputProps {
   name?: string;
@@ -31,6 +9,7 @@ interface InputProps {
   startIcon?: React.ReactNode;
   type?: string;
   value: string;
+  sx?: React.CSSProperties;
 }
 
 const Input: React.FC<InputProps> = React.memo(({
@@ -39,7 +18,8 @@ const Input: React.FC<InputProps> = React.memo(({
   placeholder,
   startIcon,
   type = 'text',
-  value
+  value,
+  sx
 }) => {
   return (
     <TextFieldComponent
@@ -49,6 +29,7 @@ const Input: React.FC<InputProps> = React.memo(({
       value={value}
       onChange={onChange}
       autoComplete='off'
+      sx={sx}
       slotProps={{
         input: {
           startAdornment: (
