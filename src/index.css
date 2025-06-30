@@ -9,7 +9,8 @@ body {
 .container {
   margin-inline: auto;
   max-width: 1440px;
-  padding-inline: 56px; 
+  padding-bottom: 24px;
+  padding-inline: 56px;
 }
 
 @media(max-width: 600px) {
